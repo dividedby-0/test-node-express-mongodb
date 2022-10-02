@@ -1,0 +1,26 @@
+{
+  "name": "test-node-express-mongodb",
+  "version": "1.0.0",
+  "description": "Testing nodeJS, expressJS and MongoDB integration for a CRUD app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dividedby-0/test-node-express-mongodb.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dividedby-0/test-node-express-mongodb/issues"
+  },
+  "homepage": "https://github.com/dividedby-0/test-node-express-mongodb#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
