@@ -3,11 +3,12 @@
 console.log('Node running properly...');
 
 const express = require('express');
+const dotenv = require('dotenv'); // used to hide credentials
+dotenv.config(); // initialize dotenv
 const bodyParser = require('body-parser'); // parses form data as obj
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
-const connectionString =
-  'mongodb+srv://test-node-express-mongodb:9HR0a7oDlOkQ8zHd@cluster0.tkzfce2.mongodb.net/?retryWrites=true&w=majority';
+const connectionString = process.env.CONNECTION_STRING;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -36,6 +37,7 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         .insertOne(request.body)
         .then((result) => {
           console.log(result);
+          response.redirect('/');
         })
         .catch((error) => console.error(error));
     });
