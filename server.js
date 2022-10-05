@@ -1,4 +1,5 @@
 // server config
+// use "npm run dev" to run
 
 console.log('Node running properly...');
 
@@ -8,17 +9,19 @@ dotenv.config(); // initialize dotenv
 const bodyParser = require('body-parser'); // parses form data as obj
 const app = express();
 const MongoClient = require('mongodb').MongoClient;
-const connectionString = process.env.CONNECTION_STRING;
+const connectionString = process.env.CONNECTION_STRING; // reads from .env file
 
+// middlewares
+app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(3000, function () {
   console.log(`Server listening on port 3000`);
 });
 
-app.get('/', (request, response) => {
-  response.sendFile(__dirname + '/index.html');
-});
+// app.get('/', (request, response) => {
+//   response.sendFile(__dirname + '/index.html');
+// });
 
 // app.post('/notes', (request, response) => {
 //   console.log(request.body);
@@ -40,6 +43,16 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           response.redirect('/');
         })
         .catch((error) => console.error(error));
+    });
+
+    app.get('/', (request, response) => {
+      db.collection('notes')
+        .find()
+        .toArray()
+        .then((notes) => {
+          response.render('index.ejs', { notes: notes });
+        })
+        .catch(/* ... */);
     });
   })
   .catch((error) => console.error(error));
