@@ -14,6 +14,8 @@ const connectionString = process.env.CONNECTION_STRING; // reads from .env file
 // middlewares
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static('public'));
+app.use(bodyParser.json());
 
 app.listen(3000, function () {
   console.log(`Server listening on port 3000`);
@@ -53,6 +55,26 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
           response.render('index.ejs', { notes: notes });
         })
         .catch(/* ... */);
+    });
+
+    app.put('/notes', (request, response) => {
+      notesCollection
+        .findOneAndUpdate(
+          { name: 'name1' },
+          {
+            $set: {
+              name: request.body.name,
+              note: request.body.note,
+            },
+          },
+          {
+            upsert: true, // create if not present
+          }
+        )
+        .then((result) => {
+          response.json('Success');
+        })
+        .catch((error) => console.error(error));
     });
   })
   .catch((error) => console.error(error));
