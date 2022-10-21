@@ -9,12 +9,15 @@
   <body>
     <h1>Notes app</h1>
     <h2>Add note</h2>
+
     <form action="/notes" method="POST">
       <input type="text" placeholder="name" name="name" />
       <input type="text" placeholder="note" name="note" />
       <button type="submit">Save note</button>
     </form>
+
     <h2>Notes in database</h2>
+
     <ul class="notes">
       <% for(var i = 0; i < notes.length; i++) {%>
       <li class="note">
@@ -23,11 +26,19 @@
       </li>
       <% } %>
     </ul>
+
     <div>
       <h2>Change note author</h2>
       <p>Replace note written by author1 with another</p>
       <button id="update-button">Replace author</button>
     </div>
+
+    <div>
+      <h2>Delete note</h2>
+      <p>Deletes a note by author1</p>
+      <button id="delete-button">Delete note</button>
+    </div>
+
     <script src="/main.js"></script>
   </body>
 </html>

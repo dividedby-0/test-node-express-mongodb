@@ -76,5 +76,17 @@ MongoClient.connect(connectionString, { useUnifiedTopology: true })
         })
         .catch((error) => console.error(error));
     });
+
+    app.delete('/notes', (request, response) => {
+      notesCollection
+        .deleteOne({ name: request.body.name })
+        .then((result) => {
+          if (result.deletedCount === 0) {
+            return response.json('No note to delete');
+          }
+          response.json('Deleted author1 note');
+        })
+        .catch((error) => console.error(error));
+    });
   })
   .catch((error) => console.error(error));
