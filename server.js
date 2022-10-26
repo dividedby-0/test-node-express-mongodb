@@ -1,5 +1,4 @@
 // server config
-// use "npm run dev" to run
 
 console.log('Node running properly...');
 
@@ -20,14 +19,6 @@ app.use(bodyParser.json());
 app.listen(3000, function () {
   console.log(`Server listening on port 3000`);
 });
-
-// app.get('/', (request, response) => {
-//   response.sendFile(__dirname + '/index.html');
-// });
-
-// app.post('/notes', (request, response) => {
-//   console.log(request.body);
-// });
 
 MongoClient.connect(connectionString, { useUnifiedTopology: true })
   .then((client) => {
